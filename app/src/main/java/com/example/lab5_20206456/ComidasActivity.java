@@ -1,9 +1,11 @@
 package com.example.lab5_20206456;
 
 import android.Manifest;
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,6 +31,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -88,7 +91,10 @@ public class ComidasActivity extends AppCompatActivity {
         ImageView backButton = findViewById(R.id.back_button);
         backButton.setOnClickListener(v -> finish());
 
-        configurarRecordatoriosPersonalizados();
+        configurarRecordatorioComida(19, 44, 100, "Hora de registrar tu desayuno!");
+        configurarRecordatorioComida(19, 45, 101, "Hora de registrar tu almuerzo!");
+        configurarRecordatorioComida(19, 46, 102, "Hora de registrar tu cena!");
+        configurarRecordatorioDiario();
     }
 
     private void crearCanalesDeNotificacion() {
@@ -101,6 +107,56 @@ public class ComidasActivity extends AppCompatActivity {
             notificationManager.createNotificationChannel(channelRecordatorio);
         }
     }
+
+
+    private void configurarRecordatorioComida(int hour, int minute, int requestCode, String mensaje) {
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, RecordatorioReceiver.class);
+        intent.putExtra("mensajeRecordatorio", mensaje);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                this, requestCode, intent, PendingIntent.FLAG_IMMUTABLE
+        );
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.SECOND, 0);
+
+        if (calendar.before(Calendar.getInstance())) {
+            calendar.add(Calendar.DATE, 1);
+        }
+
+        alarmManager.setRepeating(
+                AlarmManager.RTC_WAKEUP,
+                calendar.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY,
+                pendingIntent
+        );
+    }
+
+    private void configurarRecordatorioDiario() {
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, RecordatorioReceiver.class);
+        intent.putExtra("mensajeRecordatorio", "No has registrado ninguna comida hoy. ¡Recuerda llevar un registro de tus comidas!");
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                this, NOTIF_ID_RECORDATORIO, intent, PendingIntent.FLAG_IMMUTABLE
+        );
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 21);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+
+        alarmManager.setRepeating(
+                AlarmManager.RTC_WAKEUP,
+                calendar.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY,
+                pendingIntent
+        );
+    }
+
 
     private void actualizarCaloriasTextView() {
         tvCaloriasConsumidas.setText(totalCalorias + " / " + caloriasRequeridas + " kcal");
@@ -248,19 +304,6 @@ public class ComidasActivity extends AppCompatActivity {
                 .build();
 
         notificationManager.notify(NOTIF_ID_EXCESO_CALORIAS, notification);
-    }
-
-    private void configurarRecordatoriosPersonalizados() {
-        if (totalCalorias == 0) {
-            Notification notification = new Notification.Builder(this, "CANAL_RECORDATORIO")
-                    .setContentTitle("Recordatorio")
-                    .setContentText("No has registrado ninguna comida hoy. ¡Recuerda llevar un registro de tus comidas!")
-                    .setSmallIcon(R.drawable.reminder)
-                    .setPriority(Notification.PRIORITY_DEFAULT)
-                    .build();
-
-            notificationManager.notify(NOTIF_ID_RECORDATORIO, notification);
-        }
     }
 }
 

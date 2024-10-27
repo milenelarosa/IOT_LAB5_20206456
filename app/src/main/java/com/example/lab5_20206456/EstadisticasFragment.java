@@ -1,6 +1,9 @@
 package com.example.lab5_20206456;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -14,6 +17,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -119,7 +123,23 @@ public class EstadisticasFragment extends Fragment {
     private void configurarNotificacionDeMotivacion() {
         int intervalo = Integer.parseInt(etIntervaloNotificacion.getText().toString());
 
-        // Configurar la lógica de notificación con el intervalo especificado
-        // Aquí puedes agregar la implementación para mostrar notificaciones usando AlarmManager o WorkManager
+        AlarmManager alarmManager = (AlarmManager) requireActivity().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(requireContext(), MotivacionReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                requireContext(),
+                0,
+                intent,
+                PendingIntent.FLAG_IMMUTABLE // Asegúrate de especificar esta bandera
+        );
+
+        long intervaloEnMilisegundos = intervalo * 60 * 1000;
+        alarmManager.setRepeating(
+                AlarmManager.RTC_WAKEUP,
+                System.currentTimeMillis() + intervaloEnMilisegundos,
+                intervaloEnMilisegundos,
+                pendingIntent
+        );
+
+        Toast.makeText(requireContext(), "Notificación de motivación configurada cada " + intervalo + " minutos.", Toast.LENGTH_SHORT).show();
     }
 }
