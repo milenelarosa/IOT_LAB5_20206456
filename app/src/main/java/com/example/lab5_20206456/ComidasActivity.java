@@ -91,9 +91,9 @@ public class ComidasActivity extends AppCompatActivity {
         ImageView backButton = findViewById(R.id.back_button);
         backButton.setOnClickListener(v -> finish());
 
-        configurarRecordatorioComida(19, 44, 100, "Hora de registrar tu desayuno!");
-        configurarRecordatorioComida(19, 45, 101, "Hora de registrar tu almuerzo!");
-        configurarRecordatorioComida(19, 46, 102, "Hora de registrar tu cena!");
+        configurarRecordatorioComida(8, 00, 100, "Hora de registrar tu desayuno!");
+        configurarRecordatorioComida(13, 00, 101, "Hora de registrar tu almuerzo!");
+        configurarRecordatorioComida(19, 00, 102, "Hora de registrar tu cena!");
         configurarRecordatorioDiario();
     }
 
