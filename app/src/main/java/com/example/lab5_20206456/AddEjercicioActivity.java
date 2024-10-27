@@ -21,14 +21,12 @@ public class AddEjercicioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_actividad);
 
-        // Referencias a los elementos del layout
         etNombreEjercicio = findViewById(R.id.et_nombre_actividad);
         etTiempoEjercicio = findViewById(R.id.et_tiempo_actividad);
         etCaloriasEjercicio = findViewById(R.id.et_calorias_actividad);
         btnSave = findViewById(R.id.btn_save);
         btnCancel = findViewById(R.id.btn_cancel);
 
-        // Configuración del botón "Guardar"
         btnSave.setOnClickListener(v -> {
             String nombreActividad = etNombreEjercicio.getText().toString().trim();
             String caloriasStr = etCaloriasEjercicio.getText().toString().trim();
@@ -49,7 +47,6 @@ public class AddEjercicioActivity extends AppCompatActivity {
                 return;
             }
 
-            // Enviar los datos de la nueva comida de vuelta a InicioFragment
             Intent resultIntent = new Intent();
             resultIntent.putExtra("nombreActividad", nombreActividad);
             resultIntent.putExtra("caloriasActividad", caloriasActividad);
@@ -58,7 +55,6 @@ public class AddEjercicioActivity extends AppCompatActivity {
             finish(); // Cerrar la actividad
         });
 
-        // Configuración del botón "Cancelar"
         btnCancel.setOnClickListener(v -> finish());
     }
 

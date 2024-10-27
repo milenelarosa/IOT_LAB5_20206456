@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                     } else if (item.getItemId() == R.id.navigation_perfil) {
                         selectedFragment = perfilFragment;
                     }
-                    // Cargar el fragmento seleccionado
+
                     if (selectedFragment != null) {
                         loadFragment(selectedFragment);
                     }

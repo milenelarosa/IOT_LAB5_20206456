@@ -86,7 +86,6 @@ public class EstadisticasFragment extends Fragment {
         tvCaloriasConteo = view.findViewById(R.id.tvCaloriasConteo);
         etIntervaloNotificacion = view.findViewById(R.id.etIntervaloNotificacion);
 
-        // Cargar datos de calorías
         cargarDatosDeCalorias();
         actualizarGrafico();
 

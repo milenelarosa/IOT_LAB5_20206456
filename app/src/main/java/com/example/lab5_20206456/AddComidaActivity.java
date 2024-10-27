@@ -20,18 +20,15 @@ public class AddComidaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_comida);
 
-        // Referencias a los elementos del layout
         etNombreComida = findViewById(R.id.et_nombre_comida);
         etCaloriasComida = findViewById(R.id.et_calorias_comida);
         btnSave = findViewById(R.id.btn_save);
         btnCancel = findViewById(R.id.btn_cancel);
 
-        // Configuración del botón "Guardar"
         btnSave.setOnClickListener(v -> {
             String nombreComida = etNombreComida.getText().toString().trim();
             String caloriasStr = etCaloriasComida.getText().toString().trim();
 
-            // Validación: asegurar que los campos no estén vacíos
             if (nombreComida.isEmpty() || caloriasStr.isEmpty()) {
                 Toast.makeText(AddComidaActivity.this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
                 return;
@@ -45,7 +42,6 @@ public class AddComidaActivity extends AppCompatActivity {
                 return;
             }
 
-            // Enviar los datos de la nueva comida de vuelta a InicioFragment
             Intent resultIntent = new Intent();
             resultIntent.putExtra("nombreComida", nombreComida);
             resultIntent.putExtra("caloriasComida", caloriasComida);
@@ -53,7 +49,6 @@ public class AddComidaActivity extends AppCompatActivity {
             finish(); // Cerrar la actividad
         });
 
-        // Configuración del botón "Cancelar"
         btnCancel.setOnClickListener(v -> finish());
     }
 }
