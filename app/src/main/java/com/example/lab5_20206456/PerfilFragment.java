@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -96,6 +97,12 @@ public class PerfilFragment extends Fragment {
     }
 
     private void calcularCaloriasDiarias() {
+
+        if (etPeso.getText().toString().isEmpty() || etAltura.getText().toString().isEmpty() || etEdad.getText().toString().isEmpty()) {
+            Toast.makeText(getContext(), "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         double peso = Double.parseDouble(etPeso.getText().toString());
         double altura = Double.parseDouble(etAltura.getText().toString());
         int edad = Integer.parseInt(etEdad.getText().toString());
