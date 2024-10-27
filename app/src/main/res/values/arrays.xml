@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- arrays.xml -->
+<resources>
+    <string-array name="generos">
+        <item>Masculino</item>
+        <item>Femenino</item>
+    </string-array>
+
+    <string-array name="niveles_actividad">
+        <item>Sedentario</item>
+        <item>Ligero</item>
+        <item>Moderado</item>
+        <item>Activo</item>
+        <item>Muy Activo</item>
+    </string-array>
+</resources>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EstadisticasFragment">
+
+    <!-- res/layout/fragment_estadisticas.xml -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:paddingBottom="10dp"
+            android:text="ESTADÍSTICAS DIARIAS"
+            android:textColor="#2B3E51"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvTituloHoy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HOY"
+            android:textColor="#0FB762"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvPreguntaMotivacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingBottom="10dp"
+            android:text="¿Cada cuánto tiempo quiere recibir mensajes de motivación?"
+            android:textAlignment="center"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etIntervaloNotificacion"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginBottom="12dp"
+            android:paddingLeft="13dp"
+            android:background="@drawable/circle_white_shape"
+            android:backgroundTint="#DDE2E5"
+            android:hint="Intervalo en minutos"
+            android:inputType="number" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="335dp"
+            android:layout_marginBottom="16dp">
+
+            <!-- Gráfico de progreso circular -->
+            <ProgressBar
+                android:id="@+id/progressBarCalorias"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="289dp"
+                android:layout_height="273dp"
+                android:layout_centerInParent="true"
+                android:indeterminate="false"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/circular_progress_bar" />
+
+            <TextView
+                android:id="@+id/tvCaloriasProgreso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="0"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvCaloriasObjetivo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/progressBarCalorias"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:text="Objetivo 0"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="17dp" />
+
+        <TextView
+            android:id="@+id/tvCaloriasTotales"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#F3E5F5"
+            android:text="Total de calorías consumidas: 0 kcal"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="12dp" />
+
+        <TextView
+            android:id="@+id/tvCaloriasActividad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:background="#F3E5F5"
+            android:text="Cal quemadas por actividad: 0 kcal"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="12dp" />
+
+        <TextView
+            android:id="@+id/tvCaloriasConteo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:background="#FFF9C4"
+            android:text="Caloricas faltantes: 0 kcal"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+</FrameLayout>
